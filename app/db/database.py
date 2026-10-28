@@ -5,7 +5,7 @@ from app.core.config import settings
 
 ## Creamos el engine de SQLAlchemy para conectarnos a la base de datos
 engine = create_engine(
-    ## Obtenemos la direccion de conexion desde el archivo .env
+    ## Obtenemos la direccion de conexion desde las variables de entorno (.env)
     settings.DATABASE_URL,
     ## Comprobamos que la conexion del conjunto de conexiones diposnibles siga funcionando antes de usarla
     pool_pre_ping=True,
