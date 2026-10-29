@@ -12,8 +12,13 @@ from alembic import context
 
 ## settings permite acceder a la configuracion que ya definimos en .env
 from app.core.config import settings
+
 ## Base es la clase de la que heredan nuestros modelos de SQLAlchemy
 from app.db.database import Base
+
+### Importamos los modelos para que Alembic pueda registrar sus tablas en Base.metadata
+import app.models
+
 ## Base.metadata contiene la informacion de las tablas registradas en esa clase
 target_metadata = Base.metadata
 
