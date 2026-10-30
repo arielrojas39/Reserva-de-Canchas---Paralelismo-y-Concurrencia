@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 from sqlalchemy import text
-
+from app.api import courts
 from app.db.database import engine
 
 
@@ -25,3 +25,5 @@ def check_database():
     return {
         "database": "connected",
     }
+
+app.include_router(courts.router)
