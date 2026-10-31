@@ -89,6 +89,7 @@ python -m uvicorn app.main:app --reload
 * API: http://127.0.0.1:8000
 * Documentación Swagger: http://127.0.0.1:8000/docs
 * Verificación de conexión a PostgreSQL: http://127.0.0.1:8000/health/db
+* OpenAPI JSON: http://localhost:8000/openapi.json
 
 ## Detener los servicios
 
