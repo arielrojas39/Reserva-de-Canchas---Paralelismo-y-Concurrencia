@@ -164,3 +164,82 @@ def get_court_availability(
         "date": selected_date,
         "available_times": available_times
     }
+
+def create_reservation(
+        db: Session,
+        user_id: int,
+        court_id: int,
+        selected_date: date,
+        selected_time: time
+):
+    #1.Combinar fecha y hora utilizando el horario argentino
+    start_time = datetime.combine(
+        selected_date,
+        selected_time,
+        tzinfo=ARGENTINA_TZ
+    )
+
+    #2. Comprobar que el horario este dentro del horario comercial
+    opening, closing = get_business_hours(selected_date)
+
+    if start_time < opening or start_time + timedelta(hours=1) > closing:
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="El horario seleccionado no está dentro del horario comercial"
+        )
+    #3. Comprobar que el horario no haya pasado
+    if start_time <= datetime.now(ARGENTINA_TZ):
+        raise HTTPException(
+            status_code=status.HTTP_400_BAD_REQUEST,
+            detail="No se puede realizar reservas para horarios pasados"
+        )
+    #4. Verificar que la cancha exista
+    court =db.query(Court).filter(Court.id == court_id).first()
+    if court is None:
+        raise HTTPException(
+            status_code=status.HTTP_404_NOT_FOUND,
+            detail="Cancha no encontrada"
+        )
+
+    #5. Verificar que la cancha este activa
+    if not court.is_active:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="La cancha no se encuentra disponible"
+        )
+    #6. Verificar que el horario no se encuentre ocupado
+    reservation_exists = (
+        db.query(Reservation)
+        .filter(
+            Reservation.court_id == court_id,
+            Reservation.start_time == start_time,
+            Reservation.status.in_(["pending", "confirmed"])
+        )
+        .first()
+    )
+    if reservation_exists:
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="El horario seleccionado ya se encuentra reservado"
+        )
+    #7. Obtener el precio de la cancha
+    total_price = court.price_per_hour
+    #8. Crear la reserva
+    new_servation = Reservation(
+        user_id=user_id,
+        court_id=court_id,
+        start_time=start_time,
+        total_price=total_price,
+        status="pending"
+    )
+    db.add(new_servation)
+    try:
+        db.commit()
+        db.refresh(new_servation)
+    except Exception:
+        db.rollback()
+        raise HTTPException(
+            status_code=status.HTTP_409_CONFLICT,
+            detail="No se pudo completar la reserva. Es posible que el horario haya sido reservado recientemente"
+        )
+    return new_servation
