@@ -29,6 +29,7 @@ class ReservationResponse(BaseModel):
     id: int
     court_id: int
     user_id: int
+    court_name: str
     date: date
     time: time
     total_price: Decimal

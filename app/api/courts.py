@@ -11,7 +11,9 @@ from sqlalchemy.orm import Session
 from fastapi import APIRouter, Depends, HTTPException, status
 from app.db.database import get_db
 from app.models.court import Court
+from app.models.user import User
 from app.schemas.court import CourtResponse, CourtCreate, CourtUpdate
+from app.core.dependencies import require_admin
 
 
 # APIRouter nos permite agrupar los endpoints relacionados con las canchas en un solo objeto, 
@@ -75,7 +77,12 @@ def get_court(court_id: int, db: Session = Depends(get_db)):
 )
 
 # CourtCreate: FastAPI recibe el JSON y Pydantic valida los datos
-def create_court(court_data: CourtCreate, db: Session = Depends(get_db)):
+def create_court(
+        court_data: CourtCreate, 
+        db: Session = Depends(get_db),
+        current_user: User = Depends(require_admin)
+    ):
+    
     # model_dump() convierte el esquema Pydantic en un diccionario de Python
     #Court(**court_data.model_dumpo()) crea una instancia del modelo SQLAlchemy con esos datos
     new_court = Court(**court_data.model_dump())
@@ -97,6 +104,7 @@ def update_court(
     court_id: int,
     court_data: CourtUpdate,
     db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin)
 ):
     statement = select(Court).where(Court.id == court_id)
     # Buscamos la cancha sin el filtro de is_active, ya que queremos permitir la modificacion de canchas inactivas
@@ -139,7 +147,11 @@ def update_court(
 # HTTP 204 No Content: Indica que la solicitud se ha procesado correctamente, 
 # pero no hay contenido que devolver en la respuesta
 @router.delete("/{court_id}", status_code=status.HTTP_204_NO_CONTENT)
-def delete_court(court_id: int, db: Session = Depends(get_db)):
+def delete_court(
+    court_id: int,
+    db: Session = Depends(get_db),
+    current_user: User = Depends(require_admin)
+):
     statement = select(Court).where(Court.id == court_id)
     court = db.scalar(statement)
 

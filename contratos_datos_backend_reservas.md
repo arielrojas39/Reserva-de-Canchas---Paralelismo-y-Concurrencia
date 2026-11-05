@@ -138,7 +138,8 @@ no debería ocuparlo. `date` usa `YYYY-MM-DD`.
 ``` json
 {
   "court_id": 3,
-  "start_time": "2026-11-05T10:00:00"
+  "date": "2026-11-05",
+  "time": "10:00"
 }
 ```
 
@@ -156,7 +157,7 @@ una hora en punto.
   "court_name": "Cancha Sintética 1",
   "user_id": 2,
   "date": "2026-11-05",
-  "time":"10:00:00",
+  "time":"10:00",
   "total_price": "15000.00",
   "status": "pending",
   "created_at": "2026-11-03T17:30:00"
