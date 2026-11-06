@@ -1,0 +1,31 @@
+@use "tokens" as *;
+
+// Consulta responsive mobile-first:
+//   @include respond-to($bp-md) { ... }
+
+@mixin respond-to($breakpoint) {
+  @media (min-width: $breakpoint) {
+    @content;
+  }
+}
+
+// Anillo de foco visible y consistente (accesibilidad).
+
+@mixin focus-ring($color: $color-primary) {
+  outline: 2px solid $color;
+  outline-offset: 2px;
+}
+
+// Contenido disponible solo para lectores de pantalla.
+
+@mixin visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}

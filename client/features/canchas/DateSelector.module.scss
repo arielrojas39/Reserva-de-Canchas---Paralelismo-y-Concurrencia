@@ -1,0 +1,111 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.rango {
+  font-weight: $font-weight-regular;
+  color: $color-text-muted;
+}
+
+.strip {
+  display: flex;
+  gap: $space-2;
+  overflow-x: auto;
+  padding-bottom: $space-1;
+  scrollbar-width: thin;
+
+  &::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: $color-border;
+    border-radius: $radius-full;
+  }
+}
+
+.dia {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  min-width: 64px;
+  padding: $space-2 $space-1;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast,
+    color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+}
+
+.diaTitulo {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  color: $color-text-muted;
+  letter-spacing: 0.02em;
+}
+
+.diaIcono {
+  color: $color-primary;
+}
+
+.diaIconoOculto {
+  display: none;
+}
+
+.diaNumero {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  color: $color-text;
+}
+
+.diaMes {
+  font-size: 10px;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.diaActivo {
+  background-color: $color-primary-strong;
+  border-color: $color-primary-strong;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    border-color: $color-primary;
+  }
+
+  .diaTitulo,
+  .diaNumero,
+  .diaMes {
+    color: $color-surface;
+  }
+
+  .diaIcono {
+    color: $color-surface;
+  }
+}

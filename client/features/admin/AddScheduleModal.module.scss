@@ -1,0 +1,14 @@
+@use "../../styles/tokens" as *;
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.acciones {
+  display: flex;
+  justify-content: flex-end;
+  gap: $space-3;
+  margin-top: $space-2;
+}

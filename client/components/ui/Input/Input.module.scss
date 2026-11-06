@@ -1,0 +1,69 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  width: 100%;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.required {
+  color: $color-error;
+  margin-left: 2px;
+}
+
+.input {
+  width: 100%;
+  min-height: 42px;
+  padding: 0 $space-3;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  color: $color-text;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &::placeholder {
+    color: $color-text-muted;
+  }
+
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.15);
+    outline: none;
+  }
+
+  &:disabled {
+    background-color: $color-bg;
+    cursor: not-allowed;
+  }
+}
+
+.invalid {
+  border-color: $color-error;
+
+  &:focus {
+    border-color: $color-error;
+    box-shadow: 0 0 0 3px rgba($color-error, 0.15);
+  }
+}
+
+.hint {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.error {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-medium;
+  color: $color-error-text;
+}

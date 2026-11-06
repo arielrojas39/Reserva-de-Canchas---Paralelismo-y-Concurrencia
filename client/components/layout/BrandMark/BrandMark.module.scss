@@ -1,0 +1,53 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.mark {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+}
+
+.logo {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: $color-primary;
+  border-radius: $radius-md;
+  color: $color-surface;
+  box-shadow: $shadow-sm;
+  flex-shrink: 0;
+}
+
+.md {
+  .logo {
+    width: 36px;
+    height: 36px;
+    padding: 7px;
+  }
+
+  .name {
+    font-size: $font-size-lg;
+  }
+}
+
+.lg {
+  .logo {
+    width: 44px;
+    height: 44px;
+    padding: 9px;
+    border-radius: $radius-lg;
+  }
+
+  .name {
+    font-size: $font-size-xl;
+  }
+}
+
+.name {
+  font-weight: $font-weight-bold;
+  color: $color-text;
+}
+
+.nameAccent {
+  color: $color-primary-strong;
+}

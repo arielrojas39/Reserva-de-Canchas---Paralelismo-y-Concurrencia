@@ -1,0 +1,67 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.title {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.lista {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin: 0;
+}
+
+.fila {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.etiqueta {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  svg {
+    color: $color-primary;
+  }
+}
+
+.valor {
+  margin: 0;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+  text-align: right;
+}
+
+.id {
+  font-family: $font-mono;
+  font-weight: $font-weight-regular;
+  color: $color-text-muted;
+}

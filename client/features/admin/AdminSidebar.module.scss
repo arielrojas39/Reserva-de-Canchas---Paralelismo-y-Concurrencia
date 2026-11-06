@@ -1,0 +1,82 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.sidebar {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: $space-5;
+  width: 260px;
+  padding: $space-5 $space-4;
+  background-color: #0b1220;
+  color: rgba($color-surface, 0.75);
+
+  // Móvil: cajón deslizante.
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  transform: translateX(-100%);
+  transition: transform $transition-base;
+  box-shadow: $shadow-lg;
+
+  &.abierto {
+    transform: translateX(0);
+  }
+
+  @include respond-to($bp-lg) {
+    // Fijado al viewport: siempre visible al hacer scroll.
+    position: fixed;
+    top: 64px; // altura del header global sticky
+    bottom: 0;
+    height: auto;
+    z-index: 10; // por debajo del header (z-index20)
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+.nav {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: rgba($color-surface, 0.7);
+  transition:
+    background-color $transition-fast,
+    color $transition-fast;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    background-color: rgba($color-surface, 0.08);
+    color: $color-surface;
+  }
+}
+
+.itemActivo {
+  background-color: rgba($color-primary, 0.18);
+  color: $color-surface;
+  box-shadow: inset 3px 0 0 0 $color-primary;
+
+  svg {
+    color: $color-primary;
+  }
+}
+
+.nota {
+  font-size: $font-size-xs;
+  color: rgba($color-surface, 0.45);
+}

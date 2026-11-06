@@ -1,0 +1,32 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.pista {
+  margin-top: calc(-#{$space-2});
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+
+  strong {
+    color: $color-warning-text;
+  }
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: $space-3;
+
+  @include respond-to($bp-sm) {
+    > * {
+      flex: 1;
+    }
+  }
+}

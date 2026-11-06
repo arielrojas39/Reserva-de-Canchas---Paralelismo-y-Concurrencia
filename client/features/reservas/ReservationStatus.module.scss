@@ -1,0 +1,14 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.codigo {
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}

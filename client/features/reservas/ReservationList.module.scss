@@ -1,0 +1,27 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include respond-to($bp-md) {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  > li {
+    display: flex;
+
+    > * {
+      flex: 1;
+    }
+  }
+}

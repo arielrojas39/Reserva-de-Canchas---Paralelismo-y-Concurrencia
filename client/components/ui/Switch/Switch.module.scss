@@ -1,0 +1,76 @@
+@use "../../../styles/tokens" as *;
+
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-3;
+  cursor: pointer;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+.track {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+  width: 44px;
+  height: 26px;
+  background-color: $color-border;
+  border-radius: $radius-full;
+  transition: background-color $transition-fast;
+
+  // El track (padre del input) se pinta cuando el switch está activo.
+  &:has(.input:checked) {
+    background-color: $color-primary;
+  }
+}
+
+.input {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.thumb {
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 20px;
+  height: 20px;
+  background-color: $color-surface;
+  border-radius: $radius-full;
+  box-shadow: $shadow-sm;
+  transition: transform $transition-fast;
+  // El input (con z-index) recibe los clics; el thumb es decorativo.
+  pointer-events: none;
+}
+
+.input:checked + .thumb {
+  transform: translateX(18px);
+}
+
+.input:focus-visible + .thumb {
+  box-shadow: 0 0 0 3px rgba($color-primary, 0.35);
+}
+
+.texto {
+  line-height: $line-height-normal;
+}
+
+.hint {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+}

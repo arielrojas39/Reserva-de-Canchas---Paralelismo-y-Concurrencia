@@ -1,0 +1,16 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-3;
+  padding-block: $space-6;
+  text-align: center;
+}
+
+.mensaje {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}

@@ -1,0 +1,40 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.emptyState {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-7 $space-5;
+  text-align: center;
+}
+
+.icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 64px;
+  height: 64px;
+  margin-bottom: $space-1;
+  border-radius: $radius-full;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+}
+
+.title {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.description {
+  max-width: 42ch;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.action {
+  margin-top: $space-3;
+}

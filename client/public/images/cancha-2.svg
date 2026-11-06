@@ -1,0 +1,36 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="800" height="500" viewBox="0 0 800 500" role="img" aria-label="Ilustración de una cancha de fútbol 7 de césped natural">
+  <defs>
+    <linearGradient id="g2" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#15803d"/>
+      <stop offset="1" stop-color="#166534"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#g2)"/>
+  <g fill="#4ade80" opacity="0.12">
+    <rect y="0" width="800" height="63"/>
+    <rect y="126" width="800" height="63"/>
+    <rect y="252" width="800" height="63"/>
+    <rect y="378" width="800" height="63"/>
+  </g>
+
+  <g fill="none" stroke="#f8fafc" stroke-opacity="0.9" stroke-width="7" stroke-linecap="round">
+    <rect x="50" y="50" width="700" height="400" rx="20"/>
+    <line x1="400" y1="50" x2="400" y2="450"/>
+    <circle cx="400" cy="250" r="90"/>
+    <rect x="50" y="140" width="130" height="220" rx="8"/>
+    <rect x="620" y="140" width="130" height="220" rx="8"/>
+    <path d="M180 175a150 150 0 0 1 0 150"/>
+    <path d="M620 175a150 150 0 0 0 0 150"/>
+    <path d="M56 80a30 30 0 0 0 30-30"/>
+    <path d="M744 80a30 30 0 0 1-30-30"/>
+    <path d="M56 420a30 30 0 0 1 30 30"/>
+    <path d="M744 420a30 30 0 0 0-30 30"/>
+  </g>
+  <circle cx="400" cy="250" r="9" fill="#f8fafc"/>
+
+  <g transform="translate(150 110)">
+    <circle r="28" fill="#f8fafc" stroke="#0f172a" stroke-opacity="0.12" stroke-width="3"/>
+    <path d="M0-12 11-4 7 10-7 10-11-4Z" fill="#0f172a"/>
+  </g>
+</svg>

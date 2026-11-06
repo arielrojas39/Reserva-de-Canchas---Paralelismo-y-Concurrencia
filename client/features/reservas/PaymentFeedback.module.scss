@@ -1,0 +1,65 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.alerta {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding: $space-4;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+}
+
+.exito {
+  background-color: $color-success-soft;
+  border-color: rgba($color-success, 0.35);
+  color: $color-success-text;
+}
+
+.error {
+  background-color: $color-error-soft;
+  border-color: rgba($color-error, 0.35);
+  color: $color-error-text;
+}
+
+.otros {
+  background-color: $color-warning-soft;
+  border-color: rgba($color-warning, 0.35);
+  color: $color-warning-text;
+}
+
+.titulo {
+  font-size: $font-size-base;
+  font-weight: $font-weight-semibold;
+}
+
+.mensaje {
+  font-size: $font-size-sm;
+  line-height: $line-height-relaxed;
+}
+
+.codigo {
+  margin-top: $space-1;
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  opacity: 0.8;
+}
+
+.acciones {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-end;
+  gap: $space-3;
+
+  @include respond-to($bp-sm) {
+    > * {
+      flex: 1;
+    }
+  }
+}
