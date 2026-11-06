@@ -5,8 +5,9 @@
 # Session: permite consultar PostgreSQL.
 # Court y Reservation: son los modelos que necesitamos consultar.
 
-from datetime import date, datetime, time, timedelta
+from datetime import date, datetime, time, timedelta, timezone
 from zoneinfo import ZoneInfo
+from sqlalchemy import text
 from sqlalchemy.orm import Session
 from sqlalchemy.exc import IntegrityError
 from app.models.court import Court
@@ -207,6 +208,15 @@ def create_reservation(
         raise HTTPException(
             status_code=status.HTTP_409_CONFLICT,
             detail="La cancha no se encuentra disponible"
+        )
+    # Bloqueo por turno (advisory lock de PostgreSQL): las solicitudes por el
+    # mismo turno se ordenan en fila; turnos distintos no se bloquean entre si.
+    # Se libera solo al hacer commit o rollback. Se omite en SQLite (tests).
+    if db.get_bind().dialect.name == "postgresql":
+        slot_key = f"{court_id}:{start_time.astimezone(timezone.utc).isoformat()}"
+        db.execute(
+            text("SELECT pg_advisory_xact_lock(hashtextextended(:k, 0))"),
+            {"k": slot_key},
         )
     #6. Verificar que el horario no se encuentre ocupado
     reservation_exists = (
