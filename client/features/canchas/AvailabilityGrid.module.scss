@@ -1,0 +1,44 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.cargando {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+}
+
+.cargandoLabel {
+  @include visually-hidden;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-3;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+
+  @include respond-to($bp-sm) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.ayuda {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  svg {
+    flex-shrink: 0;
+    color: $color-success;
+  }
+}

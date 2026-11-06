@@ -1,0 +1,67 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.page {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-block: $space-6 $space-8;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: $space-5;
+  width: 100%;
+  max-width: 440px;
+}
+
+.brand {
+  align-self: flex-start;
+
+  @include respond-to($bp-sm) {
+    align-self: center;
+  }
+}
+
+.card {
+  width: 100%;
+  padding: $space-5;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+
+  @include respond-to($bp-sm) {
+    padding: $space-6;
+  }
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: -0.01em;
+}
+
+.subtitle {
+  margin-top: $space-2;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+}
+
+.footer {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  text-align: center;
+
+  a {
+    font-weight: $font-weight-semibold;
+    color: $color-primary-dark;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}

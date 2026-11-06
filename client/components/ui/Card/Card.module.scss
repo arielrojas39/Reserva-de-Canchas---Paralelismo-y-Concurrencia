@@ -1,0 +1,21 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.card {
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  padding: $space-5;
+}
+
+.interactive {
+  transition:
+    box-shadow $transition-base,
+    transform $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+  }
+}

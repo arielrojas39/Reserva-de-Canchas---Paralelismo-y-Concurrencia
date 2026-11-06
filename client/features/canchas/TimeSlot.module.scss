@@ -1,0 +1,85 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.slot {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-2;
+  padding: $space-3 $space-4;
+  min-height: 76px;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast,
+    box-shadow $transition-fast,
+    transform $transition-fast;
+}
+
+.hora {
+  font-size: $font-size-base;
+  font-weight: $font-weight-bold;
+  color: $color-text;
+  letter-spacing: -0.01em;
+}
+
+.fin {
+  font-weight: $font-weight-medium;
+  color: $color-text-muted;
+  margin-left: 2px;
+}
+
+.estado {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+}
+
+// --- Estados (color + icono + texto) ---------------------------
+.libre {
+  border-color: $color-border;
+
+  .estado {
+    color: $color-success-text;
+  }
+
+  &:hover:not(:disabled) {
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+    transform: translateY(-1px);
+  }
+}
+
+.ocupado {
+  background-color: $color-bg;
+  border-style: dashed;
+  cursor: not-allowed;
+
+  .hora,
+  .fin {
+    color: $color-text-muted;
+  }
+
+  .estado {
+    color: $color-text-muted;
+  }
+}
+
+.seleccionado {
+  background-color: $color-primary-strong;
+  border-color: $color-primary-strong;
+  box-shadow: $shadow-md;
+  transform: translateY(-1px);
+
+  .hora,
+  .fin,
+  .estado {
+    color: $color-surface;
+  }
+}

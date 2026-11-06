@@ -1,0 +1,76 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.panel {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+}
+
+.buscador {
+  position: relative;
+
+  .iconoBusqueda {
+    position: absolute;
+    right: 12px;
+    bottom: 13px;
+    color: $color-text-muted;
+    pointer-events: none;
+  }
+}
+
+.selects {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-3;
+
+  @include respond-to($bp-sm) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.campo {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+.select {
+  height: 44px;
+  padding-inline: $space-3;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  color: $color-text;
+  cursor: pointer;
+  transition: border-color $transition-fast;
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 1px;
+  }
+}
+
+.pie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.contador {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}

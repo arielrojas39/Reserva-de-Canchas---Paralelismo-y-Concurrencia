@@ -1,117 +1,171 @@
-# Backend Reserva de Canchas - Paralelismo y Concurrencia
+# CanchasPlay — Backend + Frontend
 
-## Requisitos previos
+Monorepo local con dos proyectos independientes:
 
-* Git.
-* Python 3.14.
-* Docker Desktop instalado y ejecutándose.
+| Carpeta   | Stack                                                        | Puerto |
+| --------- | ------------------------------------------------------------ | ------ |
+| `api/`    | FastAPI, SQLAlchemy 2, PostgreSQL 16, Alembic                | `8000` |
+| `client/` | Next.js 16 (App Router), React 19, TypeScript, SCSS Modules  | `3000` |
 
-**Nota:** No es necesario instalar PostgreSQL localmente. Docker Compose se encarga de ejecutar el servidor de base de datos dentro de un contenedor.
+El cliente funciona en **modo demo** (localStorage) si no se configura la API, o
+en **modo real** contra FastAPI si se define `NEXT_PUBLIC_API_URL`.
 
-## Inicializar el proyecto
+## 1. Requisitos
 
-### 1. Clonar el repositorio
+- Docker Desktop
+- Python 3.14
+- Node.js 20.9+ y pnpm 12+
 
-```powershell
-git clone https://github.com/arielrojas39/Reserva-de-Canchas---Paralelismo-y-Concurrencia
-```
-
-Ingresar a la carpeta del proyecto:
-
-```powershell
-cd "Backend Reserva de Canchas"
-```
-
-### 2. Crear el entorno virtual de Python
-
-Este paso se realiza únicamente la primera vez.
+## 2. Levantar PostgreSQL
 
 ```powershell
-python -m venv .venv
-```
-
-### 3. Activar el entorno virtual
-
-```powershell
-.\.venv\Scripts\Activate.ps1
-```
-
-### 4. Instalar las dependencias
-
-```powershell
-pip install -r requirements.txt
-```
-
-### 5. Configurar las variables de entorno
-
-Crear una copia del archivo `.env.example` y nombrarla `.env`.
-
-```powershell
-Copy-Item .env.example .env
-```
-
-#### Descripcion de las variables:
-
-* `DATABASE_URL`: dirección de conexión a PostgreSQL. Al utilizar `docker-compose.yml` original, los valores ya están configurados para funcionar localmente.
-* `JWT_SECRET`: clave secreta utilizada para firmar los tokens de autenticación. Cada integrante debe generar su propia clave.
-* `JWT_ALGORITHM`: algoritmo utilizado para firmar los tokens.
-* `JWT_EXPIRE_MINUTES`: tiempo de expiración de los tokens en minutos.
-
-### 6. Levantar PostgreSQL con Docker
-
-```powershell
+cd api
 docker compose up -d
-```
-
-Comprobar que el contenedor esté funcionando:
-
-```powershell
 docker compose ps
 ```
 
-### 7. Ejecutar las migraciones de Alembic
+PostgreSQL queda en `localhost:5434` (base `turnos`, usuario `postgres`).
 
-Este comando crea o actualiza las tablas de PostgreSQL según las migraciones del proyecto.
+## 3. Preparar el backend
 
 ```powershell
+cd api
+python -m venv .venv
+.\.venv\Scripts\Activate.ps1
+pip install -r requirements.txt
+
+Copy-Item .env.example .env
+# Editar .env:
+#   DATABASE_URL=postgresql://postgres:postgres@localhost:5434/turnos
+#   JWT_SECRET=<clave aleatoria de al menos 32 bytes>
+#   FRONTEND_ORIGINS=http://localhost:3000,http://127.0.0.1:3000
+#   SEED_ADMIN_EMAIL=admin@canchasplay.com
+#   SEED_ADMIN_PASSWORD=<contraseña local>
+#   SEED_ADMIN_NAME=Administrador CanchasPlay
+
 alembic upgrade head
-```
-
-
-### 8. Iniciar FastAPI con Uvicorn
-
-```powershell
+python -m scripts.seed
 python -m uvicorn app.main:app --reload
 ```
 
-### 9. Probar la API
+Verificación rápida:
 
-* API: http://127.0.0.1:8000
-* Documentación Swagger: http://127.0.0.1:8000/docs
-* Verificación de conexión a PostgreSQL: http://127.0.0.1:8000/health/db
+- http://127.0.0.1:8000/docs
+- http://127.0.0.1:8000/health/db
+- http://127.0.0.1:8000/courts
 
-## Detener los servicios
+> El seed es idempotente: crea 4 canchas y el admin solo si no existen.
+> `SEED_ADMIN_EMAIL` debe ser un correo válido (no uses `.local`).
 
-Para detener FastAPI, presionar `Ctrl + C` en la terminal donde se está ejecutando Uvicorn.
-
-Para detener PostgreSQL sin eliminar los datos almacenados:
-
-```powershell
-docker compose stop
-```
-
-Para volver a iniciar PostgreSQL:
+## 4. Preparar el frontend
 
 ```powershell
-docker compose start
+cd client
+pnpm install
+Copy-Item .env.example .env.local
+# Descomentar:
+# NEXT_PUBLIC_API_URL=http://127.0.0.1:8000
+pnpm dev
 ```
 
-## Notas importantes a tener en cuenta
+> Los tipos de la API se generan desde FastAPI con `pnpm generate:api`
+> (`lib/api/schema.d.ts`). No se editan a mano.
 
-* El archivo `.env` no debe subirse al repositorio.
-* Cada integrante debe configurar sus propias variables de entorno.
-* No es necesario compartir la carpeta `.venv`.
-* PostgreSQL se ejecuta mediante Docker Compose.
-* Cada integrante tendrá su propia instancia local de PostgreSQL y sus propios datos.
-* Las migraciones de Alembic permiten mantener sincronizada la estructura de la base de datos.
-* No utilizar `docker compose down -v` salvo que se quiera eliminar también el volumen con los datos de PostgreSQL.
+Abrir http://localhost:3000.
+
+> `NEXT_PUBLIC_*` se incorpora al bundle al compilar. Si cambiás la URL, reiniciá
+> `pnpm dev` o volvé a ejecutar `pnpm build`.
+
+## 5. Probar el flujo real
+
+1. Entrar a `/login` con el admin del seed.
+2. Ir a `/canchas`: deben aparecer las 4 canchas del backend, no las de demo.
+3. Elegir una fecha y un horario libre.
+4. Reservar y confirmar.
+5. Ver la reserva en `/mis-reservas`.
+6. Verificar por API:
+
+```powershell
+$token = (Invoke-RestMethod -Method Post `
+  -Uri http://127.0.0.1:8000/auth/login `
+  -ContentType "application/json" `
+  -Body '{"email":"admin@canchasplay.com","password":"<contraseña>"}').access_token
+
+Invoke-RestMethod http://127.0.0.1:8000/reservations/me `
+  -Headers @{ Authorization = "Bearer $token" }
+```
+
+## 6. Qué está conectado
+
+| Función | Estado |
+| --- | --- |
+| Registro, login, `/auth/me` | Real |
+| Catálogo de canchas | Real |
+| Disponibilidad por fecha | Real |
+| Crear reserva | Real |
+| Listar mis reservas | Real |
+| Cancelar reserva (API + UI) | Real, con confirmación y refresco |
+| Pago con Mercado Pago | Implementado; requiere credenciales y webhook público |
+| Panel admin | Demo |
+
+## 7. Mercado Pago (Checkout Pro)
+
+El backend crea la preferencia y el webhook confirma la reserva. El frontend solo
+redirige al checkout; el access token nunca llega al navegador.
+
+1. Crear una aplicación en el panel de desarrolladores:
+   https://www.mercadopago.com.ar/developers/panel/app
+2. En **Credenciales**, con el selector en **Prueba**, copiar el **Access Token**.
+3. Completar `api/.env`:
+
+```env
+MP_ACCESS_TOKEN=APP_USR-...
+MP_WEBHOOK_SECRET=<secreto que muestra Mercado Pago al configurar el webhook>
+MP_ENVIRONMENT=sandbox
+MP_WEBHOOK_URL=https://<tu-dominio-publico>/payments/webhook
+MP_STATEMENT_DESCRIPTOR=CANCHASPLAY
+FRONTEND_URL=http://localhost:3000
+```
+
+4. Exponer el backend local con HTTPS (ngrok, cloudflared o similar) y usar esa
+   URL en `MP_WEBHOOK_URL`.
+5. En **Webhooks** de la aplicación, configurar la URL pública y el evento
+   **Pagos**. Copiar la clave secreta a `MP_WEBHOOK_SECRET`.
+6. Reiniciar FastAPI y probar: reserva → “Pagar con Mercado Pago” → checkout →
+   volver a `/mis-reservas`. El webhook actualiza la reserva a `confirmed`.
+7. Para producción, activar la aplicación, reemplazar por credenciales de
+   producción, usar una URL HTTPS estable y verificar el webhook real.
+
+Guía ampliada: `informes/2026-11-05-ceo-mercado-pago.md`.
+
+## 8. Comandos de calidad
+
+```powershell
+cd client
+pnpm typecheck
+pnpm lint
+pnpm test
+pnpm build
+
+cd ..\api
+.\.venv\Scripts\python.exe -m compileall -q app scripts tests
+.\.venv\Scripts\python.exe -m pytest -q
+```
+
+## 9. Problemas comunes
+
+- **No aparecen las canchas reales:** verificá `NEXT_PUBLIC_API_URL`, que FastAPI
+  esté en `8000` y que `FRONTEND_ORIGINS` incluya el origen exacto del navegador.
+- **401 al reservar:** el token venció; volvé a iniciar sesión.
+- **409 al reservar:** otro usuario tomó el horario; se refresca la grilla.
+- **Error de email en el seed:** usá un dominio válido, por ejemplo
+  `admin@canchasplay.com`.
+- **Puerto 3000 ocupado:** cerrá el proceso anterior o usá el puerto que indique
+  Next.js.
+
+## 10. Seguridad
+
+El JWT se guarda en `localStorage` para este MVP. Antes de producción hay que
+migrar a cookie `httpOnly` + `Secure` + `SameSite`, agregar CSRF, rate limiting
+en login y CSP. El panel admin del frontend no es una frontera de seguridad: la
+autorización real la aplica FastAPI.

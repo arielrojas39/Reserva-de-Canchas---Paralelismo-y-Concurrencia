@@ -1,0 +1,59 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.alert {
+  display: flex;
+  align-items: flex-start;
+  gap: $space-3;
+  padding: $space-4;
+  border: 1px solid transparent;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+}
+
+.icon {
+  display: inline-flex;
+  flex-shrink: 0;
+  margin-top: 1px;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  min-width: 0;
+}
+
+.title {
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+}
+
+.description {
+  line-height: $line-height-normal;
+  opacity: 0.9;
+}
+
+.success {
+  background-color: $color-success-soft;
+  border-color: rgba($color-success, 0.35);
+  color: $color-success-text;
+}
+
+.error {
+  background-color: $color-error-soft;
+  border-color: rgba($color-error, 0.35);
+  color: $color-error-text;
+}
+
+.warning {
+  background-color: $color-warning-soft;
+  border-color: rgba($color-warning, 0.35);
+  color: $color-warning-text;
+}
+
+.info {
+  background-color: $color-info-soft;
+  border-color: rgba($color-info, 0.35);
+  color: $color-info-text;
+}

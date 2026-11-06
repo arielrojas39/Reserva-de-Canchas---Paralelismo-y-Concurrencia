@@ -1,0 +1,23 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.demoToggle {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: $space-3 $space-4;
+  background-color: $color-bg;
+  border: 1px dashed $color-border;
+  border-radius: $radius-md;
+}
+
+.demoHint {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.cargando {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}

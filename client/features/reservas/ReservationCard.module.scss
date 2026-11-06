@@ -1,0 +1,79 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  height: 100%;
+}
+
+.header {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.nombre {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.datos {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: $color-primary;
+  }
+}
+
+.vencimiento {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: $space-3;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+}
+
+.vencimientoInfo,
+.expiradaInfo {
+  font-size: $font-size-xs;
+  line-height: $line-height-relaxed;
+}
+
+.vencimientoInfo {
+  color: $color-text-muted;
+}
+
+.expiradaInfo {
+  padding: $space-3;
+  background-color: $color-bg;
+  border: 1px dashed $color-border;
+  border-radius: $radius-md;
+  color: $color-text-muted;
+}
+
+.acciones {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-top: auto;
+}

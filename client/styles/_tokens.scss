@@ -1,0 +1,101 @@
+// ============================================================
+// Design tokens — única fuente de verdad del design system.
+// Colores, espaciado, tipografía, sombras, radios, breakpoints
+// y estados. No usar valores hardcodeados fuera de este archivo.
+// ============================================================
+
+// --- Colores -------------------------------------------------
+// Marca
+$color-primary: #16a34a; // Verde deportivo (acentos, bordes, iconos)
+$color-primary-strong: #15803d; // Verde para fondos con texto/icono blanco (AA ≥4.5:1)
+$color-primary-dark: #166534; // Verde oscuro
+$color-primary-soft: #dcfce7; // Tinte suave de la marca
+
+// Base
+$color-bg: #f8fafc; // Fondo de página
+$color-surface: #ffffff; // Superficie blanca
+$color-text: #0f172a; // Texto principal
+$color-text-muted: #64748b; // Texto secundario
+$color-border: #e2e8f0; // Bordes y divisores
+
+// Estados semánticos
+$color-success: #16a34a;
+$color-success-soft: #dcfce7;
+$color-success-text: #15803d;
+$color-error: #dc2626;
+$color-error-soft: #fee2e2;
+$color-error-text: #b91c1c;
+$color-warning: #d97706;
+$color-warning-soft: #fef3c7;
+$color-warning-text: #b45309;
+$color-info: #0284c7;
+$color-info-soft: #e0f2fe;
+$color-info-text: #0369a1;
+
+// --- Espaciado (escala 0.25rem) -----------------------------
+$space-1: 0.25rem; // 4px
+$space-2: 0.5rem; // 8px
+$space-3: 0.75rem; // 12px
+$space-4: 1rem; // 16px
+$space-5: 1.5rem; // 24px
+$space-6: 2rem; // 32px
+$space-7: 3rem; // 48px
+$space-8: 4rem; // 64px
+
+// --- Tipografía ---------------------------------------------
+$font-sans:
+  var(--font-geist-sans),
+  "Segoe UI",
+  system-ui,
+  -apple-system,
+  sans-serif;
+$font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", monospace;
+
+$font-size-xs: 0.75rem; // 12px
+$font-size-sm: 0.875rem; // 14px
+$font-size-base: 1rem; // 16px
+$font-size-lg: 1.125rem; // 18px
+$font-size-xl: 1.25rem; // 20px
+$font-size-2xl: 1.5rem; // 24px
+$font-size-3xl: 1.875rem; // 30px
+$font-size-4xl: 2.25rem; // 36px
+
+$font-weight-regular: 400;
+$font-weight-medium: 500;
+$font-weight-semibold: 600;
+$font-weight-bold: 700;
+
+$line-height-tight: 1.2;
+$line-height-normal: 1.5;
+$line-height-relaxed: 1.65;
+
+// --- Sombras (suaves) ---------------------------------------
+$shadow-sm: 0 1px 2px rgba($color-text, 0.06);
+$shadow-md:
+  0 1px 3px rgba($color-text, 0.08),
+  0 4px 12px rgba($color-text, 0.05);
+$shadow-lg:
+  0 2px 4px rgba($color-text, 0.06),
+  0 12px 24px rgba($color-text, 0.08);
+
+// --- Radios --------------------------------------------------
+$radius-sm: 6px;
+$radius-md: 10px;
+$radius-lg: 14px;
+$radius-xl: 20px;
+$radius-full: 999px;
+
+// --- Breakpoints (mobile-first) -----------------------------
+$bp-sm: 640px;
+$bp-md: 768px;
+$bp-lg: 1024px;
+$bp-xl: 1280px;
+
+// --- Transiciones discretas ---------------------------------
+$transition-fast: 150ms ease;
+$transition-base: 200ms ease;
+
+// --- Layout --------------------------------------------------
+$container-max: 1200px;
+$container-padding: $space-4;
+$container-padding-md: $space-5;

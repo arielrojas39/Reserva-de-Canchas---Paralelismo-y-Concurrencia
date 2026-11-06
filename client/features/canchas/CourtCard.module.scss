@@ -1,0 +1,95 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  height: 100%;
+}
+
+.seleccionada {
+  border-color: $color-primary;
+  box-shadow:
+    $shadow-sm,
+    0 0 0 3px rgba($color-primary, 0.15);
+}
+
+.imageWrap {
+  position: relative;
+  margin: calc(-#{$space-5}) calc(-#{$space-5}) 0;
+  border-radius: $radius-lg $radius-lg 0 0;
+  overflow: hidden;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  display: block;
+  transition: transform $transition-base;
+}
+
+.card:hover .image {
+  transform: scale(1.03);
+}
+
+.imageFallback {
+  width: 100%;
+  aspect-ratio: 8 / 5;
+  background: linear-gradient(135deg, $color-primary, $color-primary-dark);
+}
+
+.formatBadge {
+  position: absolute;
+  top: $space-3;
+  left: $space-3;
+  box-shadow: $shadow-sm;
+}
+
+.heading {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.headingTop {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.nombre {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.descripcion {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+}
+
+.features {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  flex-grow: 1;
+
+  li {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+
+  svg {
+    flex-shrink: 0;
+    color: $color-primary;
+  }
+}

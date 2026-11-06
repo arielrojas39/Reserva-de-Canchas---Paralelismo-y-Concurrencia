@@ -1,0 +1,93 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.footer {
+  // Por encima del sidebar fijo del panel admin (z-index10) para que el pie
+  // de página se vea completo (width:100%) y no quede cortado por la columna
+  // lateral; por debajo del header global (z20) y del backdrop (z35).
+  position: relative;
+  z-index: 11;
+  background-color: $color-surface;
+  border-top: 1px solid $color-border;
+  padding-block: $space-7 $space-5;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+
+  @include respond-to($bp-md) {
+    grid-template-columns: 2fr 1fr 1fr;
+    gap: $space-5;
+  }
+}
+
+.brandBlock {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  align-self: flex-start;
+}
+
+.description {
+  max-width: 36ch;
+  line-height: $line-height-relaxed;
+}
+
+.linkGroup {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.linkTitle {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.linkList {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.link {
+  color: $color-text-muted;
+  transition: color $transition-fast;
+
+  &:hover {
+    color: $color-primary-dark;
+  }
+}
+
+.bottom {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-top: $space-6;
+  padding-top: $space-5;
+  border-top: 1px solid $color-border;
+
+  @include respond-to($bp-md) {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+  }
+}
+
+.stage {
+  font-weight: $font-weight-medium;
+}

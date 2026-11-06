@@ -1,0 +1,31 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrapper {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-3;
+  background-color: $color-warning-soft;
+  border: 1px solid rgba($color-warning, 0.35);
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  font-variant-numeric: tabular-nums;
+  color: $color-warning-text;
+}
+
+.urgente {
+  background-color: $color-error-soft;
+  border-color: rgba($color-error, 0.35);
+  color: $color-error-text;
+}
+
+.cargando {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.visuallyHidden {
+  @include visually-hidden;
+}
