@@ -3,7 +3,7 @@ from datetime import date
 from fastapi import APIRouter, Depends, HTTPException, Query, status
 from sqlalchemy import select
 from sqlalchemy.orm import Session
-
+import logging, os, threading
 from app.core.dependencies import get_current_user, require_admin
 from app.db.database import get_db
 from app.models.court import Court
@@ -22,7 +22,7 @@ from app.services.reservation_service import (
 )
 
 router = APIRouter(tags=["Reservations"])
-
+logger = logging.getLogger("uvicorn.error")
 
 def _user_role(user: User) -> str:
     """Normaliza el rol porque SQLAlchemy puede devolver un Enum o un string."""
@@ -79,13 +79,29 @@ def create_reservation_endpoint(
     db: Session = Depends(get_db),
     current_user: User = Depends(get_current_user),
 ):
-    new_reservation = create_reservation(
-        db,
+    quien = f"proceso={os.getpid()} hilo={threading.current_thread().name}"
+    logger.info(
+        "Reserva solicitada | %s | usuario=%s cancha=%s %s %s",
+        quien,
         current_user.id,
         reservation_data.court_id,
         reservation_data.date,
         reservation_data.time,
     )
+
+    try:
+        new_reservation = create_reservation(
+            db,
+            current_user.id,
+            reservation_data.court_id,
+            reservation_data.date,
+            reservation_data.time,
+        )
+    except HTTPException as error:
+        logger.info("Reserva RECHAZADA (%s) | %s", error.status_code, quien)
+        raise
+
+    logger.info("Reserva CREADA id=%s | %s", new_reservation.id, quien)
 
     court = db.get(Court, new_reservation.court_id)
     if court is None:
@@ -95,7 +111,6 @@ def create_reservation_endpoint(
         )
 
     return _build_reservation_response(new_reservation, court)
-
 
 @router.get(
     "/reservations/me",
