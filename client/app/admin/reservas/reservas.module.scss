@@ -1,0 +1,6 @@
+@use "../../../styles/tokens" as *;
+
+.titulo {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}

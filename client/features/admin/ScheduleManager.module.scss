@@ -1,0 +1,81 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.manager {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding-top: $space-3;
+  border-top: 1px solid $color-border;
+}
+
+.header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.titulo {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.vacio {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+}
+
+.lista {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: 4px 4px 4px 10px;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+}
+
+.hora {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+  font-variant-numeric: tabular-nums;
+}
+
+.botonEliminar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  background-color: transparent;
+  border: none;
+  border-radius: $radius-full;
+  color: $color-text-muted;
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast;
+
+  &:hover {
+    background-color: $color-error-soft;
+    color: $color-error;
+  }
+
+  &:focus-visible {
+    outline: 2px solid $color-primary;
+    outline-offset: 1px;
+  }
+}

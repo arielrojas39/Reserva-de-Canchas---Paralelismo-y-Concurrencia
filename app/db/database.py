@@ -15,6 +15,8 @@ engine = create_engine(
     settings.DATABASE_URL,
     ## Comprobamos que la conexion del conjunto de conexiones diposnibles siga funcionando antes de usarla
     pool_pre_ping=True,
+    pool_size=20,
+    max_overflow=20,
 )
 
 ## Creamos la clase SessionLocal para crear sesiones de SQLAlchemy para cuando

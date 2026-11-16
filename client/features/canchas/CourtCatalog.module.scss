@@ -1,0 +1,98 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.catalog {
+  display: flex;
+  flex-direction: column;
+  gap: $space-6;
+}
+
+// --- Toolbar: filtros + fecha -----------------------------------
+.toolbar {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: auto 1fr;
+    align-items: start;
+  }
+}
+
+.toolbarCard {
+  display: flex;
+  flex-direction: column;
+  // Permite que la card se ajuste al ancho de columna en vez de
+  // estirarse al contenido (evita overflow horizontal con muchas chips).
+  min-width: 0;
+  padding: $space-4 $space-5;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+}
+
+// --- Sección de horarios ----------------------------------------
+.seccion {
+  display: flex;
+  flex-direction: column;
+  gap: $space-4;
+  padding: $space-5;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+
+  @include respond-to($bp-md) {
+    padding: $space-6;
+  }
+}
+
+.seccionHeader {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: $space-3;
+}
+
+.seccionTitle {
+  font-size: $font-size-xl;
+  font-weight: $font-weight-semibold;
+}
+
+.seccionFecha {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  margin-top: $space-1;
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+
+  svg {
+    color: $color-primary;
+  }
+}
+
+// --- Acción de reserva ------------------------------------------
+.accionReserva {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding-top: $space-4;
+  border-top: 1px solid $color-border;
+}
+
+.accionFila {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-3;
+}
+
+.avisoContenido {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: $space-3;
+}

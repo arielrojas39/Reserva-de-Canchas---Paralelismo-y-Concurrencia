@@ -1,0 +1,9 @@
+# Artefactos locales que no deben subirse a Vercel (CLI o arrastre).
+# Mantener el deploy liviano y evitar que se sirva/build basura local.
+node_modules
+.next
+.vercel
+.playwright-mcp
+coverage
+*.log
+.env*

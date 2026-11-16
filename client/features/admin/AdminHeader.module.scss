@@ -1,0 +1,96 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.header {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  min-height: 64px;
+  padding-inline: $space-4;
+  background-color: $color-surface;
+  border-bottom: 1px solid $color-border;
+  position: sticky;
+  top: 0;
+  z-index: 30;
+
+  @include respond-to($bp-lg) {
+    padding-inline: $space-6;
+  }
+}
+
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background-color: transparent;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text;
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast;
+
+  &:hover {
+    background-color: $color-bg;
+    border-color: $color-primary;
+  }
+
+  @include respond-to($bp-lg) {
+    display: none;
+  }
+}
+
+.titulo {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text-muted;
+  margin-right: auto;
+}
+
+.usuario {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  margin-left: auto;
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: $radius-full;
+  background-color: $color-primary-soft;
+  color: $color-primary-dark;
+}
+
+.datos {
+  display: none;
+  flex-direction: column;
+
+  @include respond-to($bp-sm) {
+    display: flex;
+  }
+}
+
+.nombre {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.rol {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $color-primary-dark;
+}

@@ -1,0 +1,101 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.section {
+  padding-block: $space-7;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: -0.01em;
+
+  @include respond-to($bp-md) {
+    font-size: $font-size-3xl;
+  }
+}
+
+.subtitle {
+  font-size: $font-size-base;
+  color: $color-text-muted;
+}
+
+.steps {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-4;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+  counter-reset: steps;
+
+  @include respond-to($bp-md) {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.step {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-5;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-sm;
+  transition:
+    box-shadow $transition-base,
+    transform $transition-base;
+
+  &:hover {
+    box-shadow: $shadow-md;
+    transform: translateY(-2px);
+
+    .stepIcon {
+      transform: rotate(-6deg) scale(1.06);
+    }
+  }
+}
+
+.stepTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.stepIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 48px;
+  height: 48px;
+  border-radius: $radius-md;
+  background-color: $color-primary-soft;
+  color: $color-primary-dark;
+  transition: transform $transition-base;
+}
+
+.stepNumber {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-bold;
+  color: rgba($color-text, 0.08);
+  line-height: 1;
+}
+
+.stepTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.stepDescription {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+}

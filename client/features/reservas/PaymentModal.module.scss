@@ -1,0 +1,52 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.avisoDemo {
+  display: flex;
+  padding: $space-3 $space-4;
+  background-color: $color-info-soft;
+  border: 1px solid rgba($color-info, 0.3);
+  border-radius: $radius-md;
+  font-size: $font-size-xs;
+  line-height: $line-height-relaxed;
+  color: $color-info-text;
+
+  strong {
+    font-weight: $font-weight-bold;
+  }
+}
+
+.simulacion {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.simulacionLabel {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $color-text-muted;
+}
+
+.select {
+  width: 100%;
+  min-height: 40px;
+  padding: 0 $space-3;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  color: $color-text;
+  cursor: pointer;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:focus {
+    border-color: $color-primary;
+    box-shadow: 0 0 0 3px rgba($color-primary, 0.15);
+    outline: none;
+  }
+}

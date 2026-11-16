@@ -1,0 +1,63 @@
+@use "sass:color";
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.block {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.label {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-2;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-muted;
+  cursor: pointer;
+  white-space: nowrap;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast,
+    color $transition-fast,
+    box-shadow $transition-fast;
+
+  svg {
+    flex-shrink: 0;
+  }
+
+  &:hover {
+    border-color: $color-primary;
+    color: $color-primary-dark;
+  }
+}
+
+.chipActiva {
+  background-color: $color-primary-strong;
+  border-color: $color-primary-strong;
+  color: $color-surface;
+  box-shadow: $shadow-sm;
+
+  &:hover {
+    background-color: color.adjust($color-primary, $lightness: -6%);
+    border-color: color.adjust($color-primary, $lightness: -6%);
+    color: $color-surface;
+  }
+}

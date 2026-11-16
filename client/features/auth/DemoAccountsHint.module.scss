@@ -1,0 +1,91 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.box {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  padding: $space-4;
+  background-color: $color-info-soft;
+  border: 1px solid rgba($color-info, 0.3);
+  border-radius: $radius-md;
+}
+
+.title {
+  font-size: $font-size-xs;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $color-info-text;
+}
+
+.list {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.account {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: $space-2;
+  width: 100%;
+  padding: $space-2 $space-3;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+  }
+}
+
+.accountName {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.accountRole {
+  padding: 1px $space-2;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-semibold;
+  text-transform: uppercase;
+  color: $color-text-muted;
+}
+
+.accountEmail {
+  flex-basis: 100%;
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  color: $color-info-text;
+  word-break: break-all;
+}
+
+.password {
+  font-size: $font-size-xs;
+  color: $color-info-text;
+
+  code {
+    padding: 1px $space-2;
+    background-color: $color-surface;
+    border: 1px solid $color-border;
+    border-radius: $radius-sm;
+    font-family: $font-mono;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+  }
+}

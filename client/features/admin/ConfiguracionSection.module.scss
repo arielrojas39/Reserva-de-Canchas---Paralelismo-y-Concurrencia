@@ -1,0 +1,20 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.titulo {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+  align-items: flex-start;
+}
+
+.texto {
+  font-size: $font-size-sm;
+  color: $color-text-muted;
+  line-height: $line-height-relaxed;
+}

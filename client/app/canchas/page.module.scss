@@ -1,0 +1,29 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.page {
+  padding-block: $space-6 $space-8;
+}
+
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-bottom: $space-5;
+}
+
+.title {
+  font-size: $font-size-2xl;
+  font-weight: $font-weight-semibold;
+  letter-spacing: -0.01em;
+
+  @include respond-to($bp-md) {
+    font-size: $font-size-3xl;
+  }
+}
+
+.subtitle {
+  max-width: 64ch;
+  font-size: $font-size-base;
+  color: $color-text-muted;
+}

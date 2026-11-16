@@ -1,0 +1,45 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-1;
+  padding: $space-1 $space-3;
+  border-radius: $radius-full;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  line-height: $line-height-tight;
+  white-space: nowrap;
+}
+
+.primary {
+  background-color: $color-primary-soft;
+  color: $color-primary-dark;
+}
+
+.success {
+  background-color: $color-success-soft;
+  color: $color-success-text;
+}
+
+.warning {
+  background-color: $color-warning-soft;
+  color: $color-warning-text;
+}
+
+.error {
+  background-color: $color-error-soft;
+  color: $color-error-text;
+}
+
+.info {
+  background-color: $color-info-soft;
+  color: $color-info-text;
+}
+
+.neutral {
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+}

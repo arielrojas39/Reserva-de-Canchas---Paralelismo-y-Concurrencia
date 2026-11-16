@@ -1,0 +1,11 @@
+@use "../../styles/tokens" as *;
+
+.girando {
+  animation: badge-spin 1s linear infinite;
+}
+
+@keyframes badge-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}

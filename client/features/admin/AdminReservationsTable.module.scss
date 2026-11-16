@@ -1,0 +1,125 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.wrap {
+  // Móvil: scroll horizontal de respaldo si algo desborda.
+  overflow-x: auto;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+
+  @include respond-to($bp-md) {
+    overflow-x: visible;
+  }
+}
+
+.cargando {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.caption {
+  @include visually-hidden;
+}
+
+.tabla {
+  width: 100%;
+  border-collapse: collapse;
+
+  thead {
+    display: none;
+  }
+
+  tbody {
+    display: block;
+    padding: $space-3;
+  }
+
+  tr {
+    display: block;
+    margin-bottom: $space-3;
+
+    &:last-child {
+      margin-bottom: 0;
+    }
+  }
+
+  td {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: $space-3;
+    padding: 6px 0;
+    border-bottom: 1px dashed $color-border;
+    font-size: $font-size-sm;
+
+    &::before {
+      content: attr(data-label);
+      font-weight: $font-weight-semibold;
+      color: $color-text-muted;
+      flex-shrink: 0;
+    }
+
+    &:last-child {
+      border-bottom: none;
+    }
+  }
+
+  // Escritorio: tabla clásica.
+  @include respond-to($bp-md) {
+    thead {
+      display: table-header-group;
+    }
+
+    tbody {
+      display: table-row-group;
+      padding: 0;
+    }
+
+    tr {
+      display: table-row;
+      margin: 0;
+      border-bottom: 1px solid $color-border;
+
+      &:last-child {
+        border-bottom: none;
+      }
+
+      &:hover {
+        background-color: $color-bg;
+      }
+    }
+
+    th {
+      padding: $space-3 $space-4;
+      text-align: left;
+      font-size: $font-size-xs;
+      font-weight: $font-weight-bold;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      color: $color-text-muted;
+      border-bottom: 1px solid $color-border;
+    }
+
+    td {
+      display: table-cell;
+      padding: $space-3 $space-4;
+      border-bottom: none;
+
+      &::before {
+        content: none;
+      }
+    }
+  }
+}
+
+.id {
+  font-family: $font-mono;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}
+
+.correo {
+  word-break: break-all;
+}

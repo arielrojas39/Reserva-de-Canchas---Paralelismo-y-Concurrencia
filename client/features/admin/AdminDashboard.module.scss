@@ -1,0 +1,101 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.seccion {
+  display: flex;
+  flex-direction: column;
+  gap: $space-3;
+}
+
+.seccionTitle {
+  font-size: $font-size-lg;
+  font-weight: $font-weight-semibold;
+}
+
+.stats {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: $space-4;
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: repeat(4, 1fr);
+  }
+}
+
+.columnas {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-5;
+
+  @include respond-to($bp-xl) {
+    grid-template-columns: 1.4fr 1fr;
+    align-items: start;
+  }
+}
+
+.lateral {
+  display: flex;
+  flex-direction: column;
+  gap: $space-5;
+}
+
+.card {
+  padding: $space-4;
+}
+
+.actividad {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.actividadFila {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  font-size: $font-size-sm;
+}
+
+.punto {
+  width: 10px;
+  height: 10px;
+  border-radius: $radius-full;
+  flex-shrink: 0;
+}
+
+.puntoVerde {
+  background-color: $color-success;
+}
+
+.puntoAmbar {
+  background-color: $color-warning;
+}
+
+.puntoRojo {
+  background-color: $color-error;
+}
+
+.puntoGris {
+  background-color: $color-text-muted;
+}
+
+.actividadEtiqueta {
+  color: $color-text-muted;
+}
+
+.actividadValor {
+  margin-left: auto;
+  font-weight: $font-weight-semibold;
+  font-variant-numeric: tabular-nums;
+}
+
+.actividadTotal {
+  margin-top: $space-3;
+  padding-top: $space-3;
+  border-top: 1px solid $color-border;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}

@@ -1,0 +1,152 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.container {
+  position: relative;
+}
+
+.trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-1 $space-3 $space-1 $space-1;
+  background-color: transparent;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  cursor: pointer;
+  transition:
+    border-color $transition-fast,
+    box-shadow $transition-fast;
+
+  &:hover {
+    border-color: $color-primary;
+    box-shadow: $shadow-sm;
+  }
+}
+
+.avatar {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: $radius-full;
+  background-color: $color-primary-soft;
+  color: $color-primary-dark;
+}
+
+.triggerName {
+  max-width: 140px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.chevron {
+  color: $color-text-muted;
+  transition: transform $transition-fast;
+}
+
+.chevronOpen {
+  transform: rotate(180deg);
+}
+
+// --- Dropdown ---------------------------------------------------
+.menu {
+  position: absolute;
+  top: calc(100% + #{$space-2});
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  min-width: 240px;
+  padding: $space-2;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-lg;
+  animation: menu-in $transition-fast;
+}
+
+.menuHeader {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  padding: $space-2 $space-3 $space-3;
+  border-bottom: 1px solid $color-border;
+  margin-bottom: $space-2;
+}
+
+.menuName {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.menuEmail {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  word-break: break-all;
+}
+
+.menuRole {
+  align-self: flex-start;
+  margin-top: $space-1;
+  padding: 1px $space-2;
+  background-color: $color-primary-soft;
+  border-radius: $radius-full;
+  font-size: 10px;
+  font-weight: $font-weight-bold;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  color: $color-primary-dark;
+}
+
+.item {
+  display: flex;
+  align-items: center;
+  gap: $space-2;
+  width: 100%;
+  padding: $space-2 $space-3;
+  background-color: transparent;
+  border: none;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+  cursor: pointer;
+  text-align: left;
+  transition:
+    background-color $transition-fast,
+    color $transition-fast;
+
+  &:hover {
+    background-color: $color-bg;
+  }
+
+  svg {
+    color: $color-text-muted;
+  }
+}
+
+.danger {
+  color: $color-error-text;
+
+  svg {
+    color: $color-error;
+  }
+
+  &:hover {
+    background-color: $color-error-soft;
+  }
+}
+
+@keyframes menu-in {
+  from {
+    opacity: 0;
+    transform: translateY(-4px);
+  }
+}

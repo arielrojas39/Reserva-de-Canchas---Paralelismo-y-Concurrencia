@@ -1,0 +1,56 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+}
+
+.icono {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: $radius-md;
+}
+
+.verde {
+  background-color: $color-primary-soft;
+  color: $color-primary-dark;
+}
+
+.azul {
+  background-color: $color-info-soft;
+  color: $color-info-text;
+}
+
+.ambar {
+  background-color: $color-warning-soft;
+  color: $color-warning-text;
+}
+
+.gris {
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  color: $color-text-muted;
+}
+
+.valor {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.02em;
+}
+
+.etiqueta {
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+}
+
+.descripcion {
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+}

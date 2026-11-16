@@ -1,0 +1,202 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.header {
+  position: sticky;
+  top: 0;
+  z-index: 20;
+  background-color: $color-surface;
+  border-bottom: 1px solid $color-border;
+  transition: box-shadow $transition-base;
+}
+
+.scrolled {
+  box-shadow: $shadow-md;
+}
+
+.inner {
+  display: flex;
+  align-items: center;
+  gap: $space-4;
+  min-height: 64px;
+}
+
+.brand {
+  display: inline-flex;
+  align-items: center;
+  gap: $space-2;
+  margin-right: auto;
+}
+
+// --- Navegación escritorio -----------------------------------
+.nav {
+  display: none;
+
+  @include respond-to($bp-lg) {
+    display: flex;
+    align-items: center;
+    gap: $space-1;
+  }
+}
+
+.navLink {
+  position: relative;
+  padding: $space-2 $space-3;
+  border-radius: $radius-md;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-medium;
+  color: $color-text-muted;
+  transition:
+    color $transition-fast,
+    background-color $transition-fast;
+
+  &::after {
+    content: "";
+    position: absolute;
+    left: $space-3;
+    right: $space-3;
+    bottom: 4px;
+    height: 2px;
+    border-radius: $radius-full;
+    background-color: $color-primary;
+    transform: scaleX(0);
+    transform-origin: center;
+    transition: transform $transition-fast;
+  }
+
+  &:hover {
+    color: $color-text;
+    background-color: rgba($color-text, 0.04);
+  }
+
+  &:hover::after,
+  &:focus-visible::after {
+    transform: scaleX(1);
+  }
+}
+
+// --- Acciones de cuenta ---------------------------------------
+.actions {
+  display: none;
+
+  @include respond-to($bp-lg) {
+    display: flex;
+    align-items: center;
+    gap: $space-2;
+  }
+}
+
+// --- Menú móvil -----------------------------------------------
+.menuButton {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  background-color: transparent;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+  color: $color-text;
+  cursor: pointer;
+  transition:
+    background-color $transition-fast,
+    border-color $transition-fast;
+
+  &:hover {
+    background-color: $color-bg;
+    border-color: $color-primary;
+    color: $color-primary-dark;
+  }
+
+  @include respond-to($bp-lg) {
+    display: none;
+  }
+}
+
+.mobilePanel {
+  border-top: 1px solid $color-border;
+  background-color: $color-surface;
+  box-shadow: $shadow-md;
+  animation: menu-slide $transition-base;
+
+  @include respond-to($bp-lg) {
+    display: none;
+  }
+}
+
+.mobileNav {
+  display: flex;
+  flex-direction: column;
+  gap: $space-1;
+  padding-block: $space-3 $space-4;
+}
+
+.mobileNavLink {
+  padding: $space-3;
+  border-radius: $radius-md;
+  font-size: $font-size-base;
+  font-weight: $font-weight-medium;
+  color: $color-text;
+  transition: background-color $transition-fast;
+
+  &:hover {
+    background-color: $color-bg;
+    color: $color-primary-dark;
+  }
+}
+
+.mobileActions {
+  display: flex;
+  flex-direction: column;
+  gap: $space-2;
+  margin-top: $space-3;
+}
+
+// --- Usuario en panel móvil -----------------------------------
+.mobileUser {
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3;
+  margin-top: $space-2;
+  background-color: $color-bg;
+  border: 1px solid $color-border;
+  border-radius: $radius-md;
+}
+
+.mobileUserIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border-radius: $radius-full;
+  background-color: $color-primary-soft;
+  color: $color-primary-dark;
+}
+
+.mobileUserName {
+  display: block;
+  font-size: $font-size-sm;
+  font-weight: $font-weight-semibold;
+  color: $color-text;
+}
+
+.mobileUserEmail {
+  display: block;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+  word-break: break-all;
+}
+
+.mobileLogout {
+  margin-top: $space-3;
+}
+
+@keyframes menu-slide {
+  from {
+    opacity: 0;
+    transform: translateY(-6px);
+  }
+}

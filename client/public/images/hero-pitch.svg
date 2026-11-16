@@ -1,0 +1,58 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="900" viewBox="0 0 1200 900" role="img" aria-label="Ilustración de una cancha de fútbol vista desde arriba">
+  <defs>
+    <linearGradient id="cesped" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#166534"/>
+      <stop offset="0.55" stop-color="#15803d"/>
+      <stop offset="1" stop-color="#16a34a"/>
+    </linearGradient>
+    <linearGradient id="sombra" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#052e16" stop-opacity="0.38"/>
+      <stop offset="0.55" stop-color="#052e16" stop-opacity="0"/>
+    </linearGradient>
+    <radialGradient id="brillo" cx="0.5" cy="0.4" r="0.75">
+      <stop offset="0" stop-color="#bbf7d0" stop-opacity="0.32"/>
+      <stop offset="1" stop-color="#bbf7d0" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+
+  <rect width="1200" height="900" fill="url(#cesped)"/>
+
+  <g fill="#22c55e" opacity="0.13">
+    <rect x="0" width="150" height="900"/>
+    <rect x="300" width="150" height="900"/>
+    <rect x="600" width="150" height="900"/>
+    <rect x="900" width="150" height="900"/>
+  </g>
+
+  <rect width="1200" height="900" fill="url(#sombra)"/>
+  <ellipse cx="600" cy="380" rx="540" ry="380" fill="url(#brillo)"/>
+
+  <g fill="none" stroke="#f8fafc" stroke-opacity="0.9" stroke-width="10" stroke-linecap="round">
+    <rect x="110" y="110" width="980" height="680" rx="24"/>
+    <line x1="600" y1="110" x2="600" y2="790"/>
+    <circle cx="600" cy="450" r="120"/>
+    <rect x="110" y="280" width="170" height="340" rx="10"/>
+    <rect x="920" y="280" width="170" height="340" rx="10"/>
+    <rect x="110" y="380" width="64" height="140" rx="8"/>
+    <rect x="1026" y="380" width="64" height="140" rx="8"/>
+    <path d="M280 345a185 185 0 0 1 0 210"/>
+    <path d="M920 345a185 185 0 0 0 0 210"/>
+    <path d="M118 140a30 30 0 0 0 30-30"/>
+    <path d="M1082 140a30 30 0 0 1-30-30"/>
+    <path d="M118 760a30 30 0 0 1 30 30"/>
+    <path d="M1082 760a30 30 0 0 0-30 30"/>
+  </g>
+  <circle cx="600" cy="450" r="12" fill="#f8fafc"/>
+
+  <g transform="translate(770 580)">
+    <circle r="48" fill="#f8fafc" stroke="#0f172a" stroke-opacity="0.12" stroke-width="4"/>
+    <path d="M0-21 20-7 12 18-12 18-20-7Z" fill="#0f172a"/>
+    <g stroke="#0f172a" stroke-width="5" stroke-linecap="round" opacity="0.85">
+      <path d="M0-21V-40"/>
+      <path d="M20-7 38-14"/>
+      <path d="M12 18 23 34"/>
+      <path d="M-12 18-23 34"/>
+      <path d="M-20-7-38-14"/>
+    </g>
+  </g>
+</svg>

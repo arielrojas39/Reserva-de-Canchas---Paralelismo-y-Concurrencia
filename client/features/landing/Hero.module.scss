@@ -1,0 +1,147 @@
+@use "../../styles/tokens" as *;
+@use "../../styles/mixins" as *;
+
+.hero {
+  padding-block: $space-6 $space-8;
+  overflow: hidden;
+
+  @include respond-to($bp-lg) {
+    padding-block: $space-8;
+  }
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: $space-6;
+  align-items: center;
+
+  @include respond-to($bp-lg) {
+    grid-template-columns: 1.05fr 0.95fr;
+    gap: $space-7;
+  }
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: $space-4;
+}
+
+.title {
+  font-size: $font-size-3xl;
+  font-weight: $font-weight-bold;
+  line-height: $line-height-tight;
+  letter-spacing: -0.02em;
+
+  @include respond-to($bp-md) {
+    font-size: 2.75rem;
+  }
+}
+
+.subtitle {
+  max-width: 52ch;
+  font-size: $font-size-lg;
+  color: $color-text-muted;
+}
+
+.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: $space-3;
+  margin-top: $space-2;
+}
+
+// --- Visual ---------------------------------------------------
+.visual {
+  position: relative;
+}
+
+.image {
+  width: 100%;
+  height: auto;
+  border-radius: $radius-xl;
+  box-shadow: $shadow-lg;
+}
+
+.floatChip {
+  position: absolute;
+  left: $space-4;
+  bottom: $space-4;
+  display: flex;
+  align-items: center;
+  gap: $space-3;
+  padding: $space-3 $space-4;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-lg;
+  box-shadow: $shadow-md;
+  animation: chip-float 4s ease-in-out infinite;
+
+  @include respond-to($bp-md) {
+    left: $space-5;
+    bottom: $space-5;
+  }
+}
+
+.floatIcon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  border-radius: $radius-full;
+  background-color: $color-success-soft;
+  color: $color-success-text;
+}
+
+.floatText {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: $font-size-xs;
+  color: $color-text-muted;
+
+  strong {
+    font-size: $font-size-sm;
+    font-weight: $font-weight-semibold;
+    color: $color-text;
+  }
+}
+
+.floatBadge {
+  position: absolute;
+  top: $space-4;
+  right: $space-4;
+  display: none;
+  align-items: center;
+  gap: $space-2;
+  padding: $space-2 $space-3;
+  background-color: $color-surface;
+  border: 1px solid $color-border;
+  border-radius: $radius-full;
+  box-shadow: $shadow-sm;
+  font-size: $font-size-xs;
+  font-weight: $font-weight-semibold;
+  color: $color-primary-dark;
+
+  svg {
+    color: $color-primary;
+  }
+
+  @include respond-to($bp-md) {
+    display: inline-flex;
+  }
+}
+
+@keyframes chip-float {
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-6px);
+  }
+}

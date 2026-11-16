@@ -1,0 +1,50 @@
+@use "../../../styles/tokens" as *;
+@use "../../../styles/mixins" as *;
+
+.spinner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: $color-primary;
+}
+
+.circle {
+  border: 2px solid rgba($color-primary, 0.25);
+  border-top-color: $color-primary;
+  border-radius: $radius-full;
+  animation: spinner-rotate 0.7s linear infinite;
+}
+
+.sm {
+  .circle {
+    width: 14px;
+    height: 14px;
+    border-width: 2px;
+  }
+}
+
+.md {
+  .circle {
+    width: 24px;
+    height: 24px;
+    border-width: 3px;
+  }
+}
+
+.lg {
+  .circle {
+    width: 40px;
+    height: 40px;
+    border-width: 4px;
+  }
+}
+
+.srOnly {
+  @include visually-hidden;
+}
+
+@keyframes spinner-rotate {
+  to {
+    transform: rotate(360deg);
+  }
+}
